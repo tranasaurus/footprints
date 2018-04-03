@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+ruby "2.2.0"
+gem 'rails', '4.2.0'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 3.1.0'
 gem 'turbolinks', '~> 2.2.1'
@@ -18,6 +19,7 @@ gem "omniauth-google-oauth2", '~> 0.2.2'
 gem "edn", '~> 1.0.2'
 gem "httparty", '~> 0.13.0'
 gem "american_date"
+gem "devise"
 
 gem 'warehouse', git: 'https://github.com/ryanzverner/stockroom-ruby-client.git'
 

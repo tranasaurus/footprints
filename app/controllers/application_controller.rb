@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
+    if (current_user == nil)
+      return false
+    end
+    
     current_user.admin?
   end
   helper_method :admin?

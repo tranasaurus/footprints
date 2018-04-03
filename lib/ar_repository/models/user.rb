@@ -3,6 +3,8 @@ require './lib/repository'
 class User < ActiveRecord::Base
   include ActiveModel::Validations
 
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
   belongs_to :craftsman
   before_create :associate_craftsman
 
