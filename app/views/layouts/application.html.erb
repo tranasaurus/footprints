@@ -35,7 +35,7 @@
               <li><span class="nav-icon templates"></span><p>Templates</p></li>
             </a>
 
-            <% if admin? %>
+            <% if current_user && admin? %>
               <a href="/salaries/edit">
                 <li><span class="nav-icon salaries"></span><p>Salaries</p></li>
               </a>

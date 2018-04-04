@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :authenticate_user!
   attr_accessor :repo
 
   def current_user
