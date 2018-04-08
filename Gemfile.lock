@@ -257,9 +257,9 @@ DEPENDENCIES
   mail (~> 2.5.4)
   mysql2 (~> 0.3.15)
   nilify_blanks (~> 1.0.3)
-  omniauth-google-oauth2 (~> 0.2.2)
+  omniauth-google-oauth2
   rails (= 4.2.0)
-  rake (~> 10.1.1)
+  rake
   rspec-rails (~> 2.14.1)
   safe_yaml (~> 1.0.1)
   sass-rails (~> 4.0.0)

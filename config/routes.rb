@@ -1,10 +1,10 @@
 
 Footprints::Application.routes.draw do
 
-  devise_for :users
-  get 'auth/google_oauth2/callback', to: 'sessions#create', :as => :new_session
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  
+  get 'users/auth/google_oauth2/callback', to: 'sessions#create', :as => :new_session
   delete 'sessions/destroy', :as => :sessions_destroy
-  get 'sessions/oauth_signin' => 'sessions#oauth_signin', :as => :oauth_signin
   get "applicants" => 'applicants#index'
   get "applicants/unassigned" => 'applicants#unassigned', as: 'unassigned_applicants'
   get "applicants/new" => 'applicants#new', as: 'new_applicant'
@@ -25,7 +25,7 @@ Footprints::Application.routes.draw do
   post "applicants/:id/update_employment_dates" => 'applicants#update_employment_dates'
   patch "applicants/:id/unarchive" => 'applicants#unarchive', as: "unarchive_applicant"
 
-  get 'users/:id', to: 'users#show', as: 'user'
+  get 'users/:id', to: 'users#show', as: 'users'
   get 'users/:id/edit', to: 'users#edit', as: 'edit_user'
   post 'users/:id', to: 'users#update'
 
