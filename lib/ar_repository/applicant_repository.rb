@@ -37,7 +37,7 @@ module ArRepository
     end
 
     def find_like(term)
-      result = where("name like #{term}")
+      result = where("name like ?", "%#{term}%")
       result.empty? ? where("name like #{term}%") : result
     end
 

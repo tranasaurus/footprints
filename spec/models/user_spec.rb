@@ -5,7 +5,8 @@ describe User do
     'provider' => 'google_oauth2',
     'uid' => '12345',
     'info' => {
-    'email' => 'test@user.com'}
+    'email' => 'test@user.com',
+    'password' => 'Password123!'}
   }}
 
   before :each do

@@ -16,10 +16,10 @@ class SessionsController < ApplicationController
       redirect_to redirect_target
     rescue Warehouse::AuthenticationError, Warehouse::AuthorizationError => e
       display_authorization_message_and_log_exception(e)
-      redirect_to oauth_signin_path
+      redirect_to new_user_session_url
     rescue Exception => e
       display_message_and_log_exception("There was a problem when logging in. Please contact it@abcinc.com.", e)
-      redirect_to oauth_signin_path
+      redirect_to new_user_session_url
     end
   end
 
@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   def destroy
     session.delete(:user_id)
     session.delete(:id_token)
-    redirect_to oauth_signin_path
+    redirect_to new_user_session_url
   end
 
   private

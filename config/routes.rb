@@ -1,6 +1,7 @@
 
 Footprints::Application.routes.draw do
 
+  get 'users/sign_in' => 'sessions#oauth_signin', :as => :oauth_signin
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   
   get 'users/auth/google_oauth2/callback', to: 'sessions#create', :as => :new_session
@@ -63,4 +64,5 @@ Footprints::Application.routes.draw do
   put "apprentices/:id" => "apprentices#update"
 
    root :to => "dashboard#index"
+   resources :users
 end

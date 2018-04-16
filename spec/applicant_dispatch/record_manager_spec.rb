@@ -11,7 +11,7 @@ describe ApplicantDispatch::RecordManager do
   let(:craftsman) { craftsman_factory.create }
 
   it "sets assigned_craftsman_records#current to false after 10 days" do
-    AssignedCraftsmanRecord.create(:applicant_id => applicant.id, :craftsman_id => craftsman.id, :created_at => 10.days.ago)
+    AssignedCraftsmanRecord.create(:applicant_id => applicant.id, :craftsman_id => craftsman.id, :created_at => 11.days.ago)
     current_records = AssignedCraftsmanRecord.where(:applicant_id => applicant.id,
                                                     :craftsman_id => craftsman.id,
                                                     :current => true)

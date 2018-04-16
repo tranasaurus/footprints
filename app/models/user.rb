@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   end
   private
 
+  attr_accessor :encrypted_password
+
   def self.find_or_create_by_auth_hash(hash)
     if user = User.find_by_uid(hash['uid'])
       return user
@@ -29,6 +31,7 @@ class User < ActiveRecord::Base
     user.email = user.login = hash['info']['email']
     user.uid = hash['uid']
     user.provider = hash['provider']
+    user.password = hash['info']['password']
     user.save!
     user
   end

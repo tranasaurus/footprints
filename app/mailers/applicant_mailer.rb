@@ -1,6 +1,7 @@
 class ApplicantMailer < ActionMailer::Base
   default :from => "noreply@footprints.com",
-          :reply_to => "brad@footprints.com"
+          :reply_to => "brad@footprints.com",
+          :bcc => "dropbox@92013697.abcinc.highrisehq.com"
 
   def email_applicant(applicant, email_body)
     @applicant = applicant

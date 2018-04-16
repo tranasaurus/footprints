@@ -2,7 +2,8 @@ shared_examples "user repository" do
   let(:repo) { described_class.new }
   let(:attrs) {{
     :login => "test@user.com",
-    :email => "test@user.com" }}
+    :email => "test@user.com",
+    :password => "Password123!" }}
 
   let(:user) { repo.create(attrs) }
 
@@ -10,7 +11,8 @@ shared_examples "user repository" do
     'provider' => 'google_oauth2',
     'uid' => '123456',
     'info' => {
-      'email' => 'test@user.com'
+      'email' => 'test@user.com',
+      'password' => 'Password123!'
     }}}
 
   before do
