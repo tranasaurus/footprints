@@ -1,4 +1,3 @@
-require './app/models/user'
 require 'ar_repository/base_repository'
 
 module ArRepository
@@ -29,10 +28,6 @@ module ArRepository
 
     def find_by_uid(uid)
       model_class.find_by_uid(uid)
-    end
-
-    def find_or_create_by_auth_hash(hash)
-      model_class.find_or_create_by_auth_hash(hash)
     end
   end
 end
