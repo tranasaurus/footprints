@@ -2,6 +2,7 @@ require './app/models/user'
 
 Footprints::Application.routes.draw do
 
+  devise_for :users
   get 'auth/google_oauth2/callback', to: 'sessions#create', :as => :new_session
   delete 'sessions/destroy', :as => :sessions_destroy
   get 'sessions/oauth_signin' => 'sessions#oauth_signin', :as => :oauth_signin
