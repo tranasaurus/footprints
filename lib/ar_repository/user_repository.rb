@@ -1,4 +1,4 @@
-require 'ar_repository/models/user'
+require './app/models/user'
 require 'ar_repository/base_repository'
 
 module ArRepository
