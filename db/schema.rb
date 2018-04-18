@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904131223) do
+ActiveRecord::Schema.define(version: 20180418175426) do
 
-  create_table "annual_starting_craftsman_salaries", force: true do |t|
+  create_table "annual_starting_craftsman_salaries", force: :cascade do |t|
     t.string "location", null: false
     t.float  "amount",   null: false
   end
 
-  create_table "applicants", force: true do |t|
+  create_table "applicants", force: :cascade do |t|
     t.string   "name"
     t.date     "applied_on"
     t.string   "email"
@@ -56,11 +56,11 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.date     "offered_on"
   end
 
-  add_index "applicants", ["craftsman_id"], name: "index_applicants_on_craftsman_id", using: :btree
-  add_index "applicants", ["name"], name: "index_applicants_on_name", using: :btree
-  add_index "applicants", ["slug"], name: "index_applicants_on_slug", unique: true, using: :btree
+  add_index "applicants", ["craftsman_id"], name: "index_applicants_on_craftsman_id"
+  add_index "applicants", ["name"], name: "index_applicants_on_name"
+  add_index "applicants", ["slug"], name: "index_applicants_on_slug", unique: true
 
-  create_table "assigned_craftsman_records", force: true do |t|
+  create_table "assigned_craftsman_records", force: :cascade do |t|
     t.integer  "applicant_id"
     t.integer  "craftsman_id"
     t.boolean  "current",      default: true
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "updated_at"
   end
 
-  create_table "craftsmen", force: true do |t|
+  create_table "craftsmen", force: :cascade do |t|
     t.string  "name"
     t.string  "status"
     t.integer "employment_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.date    "unavailable_until"
   end
 
-  create_table "friendly_id_slugs", force: true do |t|
+  create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
     t.string   "sluggable_type", limit: 50
@@ -91,12 +91,12 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
-  create_table "messages", force: true do |t|
+  create_table "messages", force: :cascade do |t|
     t.integer  "applicant_id"
     t.text     "body"
     t.datetime "created_at"
@@ -104,15 +104,15 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["applicant_id"], name: "index_messages_on_applicant_id", using: :btree
+  add_index "messages", ["applicant_id"], name: "index_messages_on_applicant_id"
 
-  create_table "monthly_apprentice_salaries", force: true do |t|
+  create_table "monthly_apprentice_salaries", force: :cascade do |t|
     t.integer "duration", null: false
     t.string  "location", null: false
     t.float   "amount",   null: false
   end
 
-  create_table "notes", force: true do |t|
+  create_table "notes", force: :cascade do |t|
     t.text     "body"
     t.integer  "craftsman_id"
     t.integer  "applicant_id"
@@ -120,14 +120,14 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "updated_at"
   end
 
-  create_table "notifications", force: true do |t|
+  create_table "notifications", force: :cascade do |t|
     t.integer  "applicant_id"
     t.integer  "craftsman_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "login"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -136,7 +136,19 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.string   "provider"
     t.integer  "craftsman_id"
     t.boolean  "employee"
-    t.boolean  "admin",        default: false, null: false
+    t.boolean  "admin",                  default: false, null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
