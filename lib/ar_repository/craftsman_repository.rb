@@ -1,4 +1,4 @@
-require 'ar_repository/models/craftsman'
+require './app/models/craftsman'
 require 'ar_repository/base_repository'
 
 module ArRepository
