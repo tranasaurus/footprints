@@ -199,6 +199,24 @@ module DefaultSeed
         puts "#{name} added to the #{Rails.env} environment"
       end
 
+
+      [
+        "Matt Trana",
+        "Steve McSteve",
+      ].each_with_index do |name, i|
+        ::Craftsman.create!({
+          :name           => name,
+          :location       => "Washington",
+          :employment_id  => i + 10000,
+          :email          => "#{name.downcase.gsub(' ', '.')}@selinc.com",
+          :seeking        => true,
+          :has_apprentice => [true, false].sample,
+          :skill          => [1, 2].sample,
+        })
+
+        puts "#{name} added to the #{Rails.env} environment"
+      end
+
       new_craftsman = Footprints::Repository.craftsman.create({
         :name           => "Russell Baker (London Director)",
         :location       => "London",
@@ -244,10 +262,10 @@ module DefaultSeed
       puts "#{new_craftsman.name} added to the #{Rails.env} environment"
 
       new_craftsman = Footprints::Repository.craftsman.create({
-        :name           => "Natalie Snow",
-        :location       => "Chicago",
+        :name           => "Matt Trana",
+        :location       => "Washington",
         :employment_id  => 102,
-        :email          => "you@abcinc.com",
+        :email          => "matt@selinc.com",
         :seeking        => true,
         :has_apprentice => [true, false].sample,
         :skill          => [1, 2].sample})
@@ -262,26 +280,37 @@ module DefaultSeed
       puts "-----------------------Adding Users-------------------------"
 
       new_user = Footprints::Repository.user.create({
-        :email => ENV['STEWARD']
+        :email => 'user@someemail.com',
+        :password => 'password'
       })
 
-      puts "New User LINKED TO #{new_user.craftsman.name} FROM CALLBACK"
+      #puts "New User LINKED TO #{new_user.craftsman.name} FROM CALLBACK"
 
       new_user = Footprints::Repository.user.create({
-        :email => "b.craftsman@gmail.com"
+        :email => "b.craftsman@gmail.com",
+        :password => 'password'
       })
 
       puts "new user added to the #{Rails.env} environment"
 
-      new_user = Footprints::Repository.user.create({
-        :login => "you@abcinc.com",
+      ::User.create!({
+        :login => "matt@selinc.com",
         :uid   => "107478018817920458918",
         :provider => "google_oauth2",
-        :email => "you@abcinc.com",
-        :admin => true
+        :email => "matt@selinc.com",
+        :admin => true,
+        :password => 'password'
       })
+      ::User.create!({
+       :login => "steve@selinc.com",
+       :uid   => "107478012227920458918",
+       :provider => "google_oauth2",
+       :email => "steve@selinc.com",
+       :admin => true,
+       :password => 'password'
+     })
 
-      puts "new user added to the #{Rails.env} environment"
+      puts "SEL users added to the #{Rails.env} environment"
 
       puts "------------------------------------------------------------"
     end
