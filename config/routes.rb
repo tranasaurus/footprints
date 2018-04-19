@@ -1,9 +1,9 @@
 
 Footprints::Application.routes.draw do
-  get 'users/sign_in' => 'sessions#oauth_signin', :as => :oauth_signin
+  #get 'users/sign_in' => 'sessions#oauth_signin', :as => :oauth_signin
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
+resources :users
   get 'auth/google_oauth2/callback', to: 'users/omniauth_callbacks#google_oauth2', :as => :new_session
   delete 'sessions/destroy', :as => :sessions_destroy
   #get 'sessions/oauth_signin' => 'sessions#oauth_signin', :as => :oauth_signin
@@ -27,9 +27,9 @@ Footprints::Application.routes.draw do
   post "applicants/:id/update_employment_dates" => 'applicants#update_employment_dates'
   patch "applicants/:id/unarchive" => 'applicants#unarchive', as: "unarchive_applicant"
 
-  get 'users/:id', to: 'users#show', as: 'user'
-  get 'users/:id/edit', to: 'users#edit', as: 'edit_user'
-  post 'users/:id', to: 'users#update'
+ # get 'users/:id', to: 'users#show', as: 'user'
+  #get 'users/:id/edit', to: 'users#edit', as: 'edit_user'
+  #post 'users/:id', to: 'users#update'
 
   post "messages/create" => 'messages#create'
 
